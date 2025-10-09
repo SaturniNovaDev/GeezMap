@@ -1,0 +1,92 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------------------------------------------------- */
+/* REGLAS PARA ANULAR EL ICONO DE TEXTO DE LEAFLET (+/-) */
+/* ---------------------------------------------------- */
+
+/* Seleccionamos los enlaces dentro del control de zoom */
+.leaflet-control-zoom a {
+  /* Ocultamos el texto (el "+" o "-") que Leaflet usa por defecto */
+  font-size: 0 !important;
+  text-indent: -9999px !important;
+  /* Aseguramos que el fondo sea transparente inicialmente para ver la imagen */
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  border: none !important;
+  padding: 0 !important; /* Quitamos cualquier padding que afecte el tamaño */
+}
+
+/* Opcional: Anular el pseudoelemento ::before (donde a veces se genera el icono) */
+.leaflet-control-zoom a::before {
+  content: none !important;
+}
+
+/* ---------------------------------------------------- */
+/* REGLAS PARA APLICAR TUS ICONOS SVG */
+/* ---------------------------------------------------- */
+
+.leaflet-control-zoom-in {
+  /* Define un tamaño fijo para tu botón si tus SVG son cuadrados */
+  width: 30px !important;
+  height: 30px !important;
+
+  /* Aplica tu SVG como fondo */
+  background-image: url("/zoomIn.svg") !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 80% 80% !important; /* Ocupa el 80% del botón */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important; /* Separador */
+}
+
+.leaflet-control-zoom-out {
+  width: 30px !important;
+  height: 30px !important;
+
+  /* Aplica tu SVG como fondo */
+  background-image: url("/zoomOut.svg") !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 80% 80% !important;
+}
+
+/* Opcional: Estilo al pasar el ratón */
+.leaflet-control-zoom a:hover {
+  background-color: #eee !important;
+}
