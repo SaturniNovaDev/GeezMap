@@ -1,8 +1,13 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css"; // ¡Importante! Estilos base de Leaflet
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+} from "react-leaflet";
+import { useState } from "react";
+import "leaflet/dist/leaflet.css";
 
-// Nota: Leaflet a veces tiene problemas para encontrar los íconos de marcador.
-// Esta es una solución común en React:
 import L from "leaflet";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
@@ -17,15 +22,28 @@ let DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
-function MapaEventos() {
-  const posicionInicial = [40.4167, -3.7038];
-  const zoomInicial = 5;
+function ClickHandler({ onMapClick }) {
+  useMapEvents({
+    click(e) {
+      onMapClick(e.latlng); // latlng = { lat, lng }
+    },
+  });
+  return null;
+}
+
+function MyMapEvents() {
+  const initialPosition = [0, 0];
+  const initialZoom = 5;
+  const [markerPosition, setMarkerPosition] = useState(null);
+
+  const handleMapClick = (latlng) => {
+    setMarkerPosition([latlng.lat, latlng.lng]);
+  };
 
   return (
-    // MapContainer es el contenedor principal del mapa.
     <MapContainer
-      center={posicionInicial}
-      zoom={zoomInicial}
+      center={initialPosition}
+      zoom={initialZoom}
       scrollWheelZoom={true}
       style={{ height: "100vh", width: "100%" }}
     >
@@ -34,14 +52,26 @@ function MapaEventos() {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      <Marker position={posicionInicial}>
+      <ClickHandler onMapClick={handleMapClick} />
+
+      <Marker position={initialPosition}>
         <Popup>
-          ¡Mi evento guardado! <br /> Latitud: {posicionInicial[0]}, Longitud:{" "}
-          {posicionInicial[1]}
+          Default Marker <br />
+          Latitude: {initialPosition[0]}, Longitude: {initialPosition[1]}
         </Popup>
       </Marker>
+
+      {markerPosition && (
+        <Marker position={markerPosition}>
+          <Popup>
+            <input placeholder="Your marker!"></input> <br />
+            Latitude: {markerPosition[0].toFixed(4)}, Longitude:{" "}
+            {markerPosition[1].toFixed(4)}
+          </Popup>
+        </Marker>
+      )}
     </MapContainer>
   );
 }
 
-export default MapaEventos;
+export default MyMapEvents;
