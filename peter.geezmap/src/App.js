@@ -8,6 +8,8 @@ import {
 import { useState } from "react";
 import "leaflet/dist/leaflet.css";
 
+import "./App.css";
+
 import L from "leaflet";
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
@@ -31,7 +33,7 @@ function ClickHandler({ onMapClick }) {
   return null;
 }
 
-function MyMapEvents() {
+function App() {
   const initialPosition = [0, 0];
   const initialZoom = 5;
   const [markerPosition, setMarkerPosition] = useState(null);
@@ -41,37 +43,47 @@ function MyMapEvents() {
   };
 
   return (
-    <MapContainer
-      center={initialPosition}
-      zoom={initialZoom}
-      scrollWheelZoom={true}
-      style={{ height: "100vh", width: "100%" }}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+    <div className="App">
+      <div className="App-sidebar">
+        <h2>GeezMap</h2>
+        <p>Click on the map to add a marker!</p>
+        <p>
+          You can then customise it with your own name for it or another color.
+        </p>
+      </div>
+      <MapContainer
+        center={initialPosition}
+        zoom={initialZoom}
+        scrollWheelZoom={true}
+        style={{ height: "100vh", width: "100%" }}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
 
-      <ClickHandler onMapClick={handleMapClick} />
+        <ClickHandler onMapClick={handleMapClick} />
 
-      <Marker position={initialPosition}>
-        <Popup>
-          Default Marker <br />
-          Latitude: {initialPosition[0]}, Longitude: {initialPosition[1]}
-        </Popup>
-      </Marker>
-
-      {markerPosition && (
-        <Marker position={markerPosition}>
+        <Marker position={initialPosition}>
           <Popup>
-            <input placeholder="Your marker!"></input> <br />
-            Latitude: {markerPosition[0].toFixed(4)}, Longitude:{" "}
-            {markerPosition[1].toFixed(4)}
+            Default Marker <br />
+            Latitude: {initialPosition[0]}, Longitude: {initialPosition[1]}
           </Popup>
         </Marker>
-      )}
-    </MapContainer>
+
+        {markerPosition && (
+          <Marker position={markerPosition}>
+            <Popup>
+              <input placeholder="Your marker!"></input> <br />
+              <input type="color" defaultValue="#ff0000" /> <br />
+              Latitude: {markerPosition[0].toFixed(4)}, Longitude:{" "}
+              {markerPosition[1].toFixed(4)}
+            </Popup>
+          </Marker>
+        )}
+      </MapContainer>
+    </div>
   );
 }
 
-export default MyMapEvents;
+export default App;
