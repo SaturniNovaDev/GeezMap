@@ -1,3 +1,6 @@
+import "./App.css";
+import { useState } from "react";
+
 import {
   MapContainer,
   TileLayer,
@@ -5,22 +8,42 @@ import {
   Popup,
   useMapEvents,
 } from "react-leaflet";
-import { useState } from "react";
+
 import "leaflet/dist/leaflet.css";
-
-import "./App.css";
-
 import L from "leaflet";
-import icon from "leaflet/dist/images/marker-icon.png";
-import iconShadow from "leaflet/dist/images/marker-shadow.png";
+import icon from "./media/marker-iconx32.png";
+
+import {
+  Slider,
+  Sketch,
+  Material,
+  Colorful,
+  Compact,
+  Circle,
+  Wheel,
+  Block,
+  Github,
+  Chrome,
+} from "@uiw/react-color";
+import {
+  Alpha,
+  Hue,
+  ShadeSlider,
+  Saturation,
+  Interactive,
+  hsvaToHslaString,
+} from "@uiw/react-color";
+import {
+  EditableInput,
+  EditableInputRGBA,
+  EditableInputHSLA,
+} from "@uiw/react-color";
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
-  shadowUrl: iconShadow,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
+  iconSize: [42, 42],
+  iconAnchor: [12, 42],
+  popupAnchor: [9, -23],
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
@@ -37,10 +60,10 @@ function App() {
   const initialPosition = [0, 0];
   const initialZoom = 5;
   const [markerPosition, setMarkerPosition] = useState(null);
-
   const handleMapClick = (latlng) => {
     setMarkerPosition([latlng.lat, latlng.lng]);
   };
+  const [hex, setHex] = useState("");
 
   return (
     <div className="App">
@@ -72,10 +95,42 @@ function App() {
         </Marker>
 
         {markerPosition && (
-          <Marker position={markerPosition}>
-            <Popup>
-              <input placeholder="Your marker!"></input> <br />
-              <input type="color" defaultValue="#ff0000" /> <br />
+          <Marker position={markerPosition} id="custom_marker">
+            <Popup id="custom_marker_popup">
+              Customize your marker! <br />
+              <input
+                name="custom_marker_name"
+                id="custom_marker_name"
+                placeholder="Your marker!"
+                style={{
+                  marginBlock: "10px",
+                  borderTop: "none",
+                  borderLeft: "none",
+                  borderRight: "none",
+                  borderBottom: `2px solid ${hex}`,
+                  backgroundColor: "#eee",
+                }}
+              ></input>
+              <Circle
+                id="color_picker"
+                colors={[
+                  "#f57e90",
+                  "#ffadad",
+                  "#ffd6a5",
+                  "#fbfea0",
+                  "#caffbf",
+                  "#95cf92",
+                  "#9bf6ff",
+                  "#a0c4ff",
+                  "#6cc6f3",
+                  "#bdb2ff",
+                  "#ff9ed7",
+                ]}
+                color={hex}
+                onChange={(color) => {
+                  setHex(color.hex);
+                }}
+              />
               Latitude: {markerPosition[0].toFixed(4)}, Longitude:{" "}
               {markerPosition[1].toFixed(4)}
             </Popup>
