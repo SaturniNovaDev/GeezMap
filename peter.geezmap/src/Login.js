@@ -23,6 +23,15 @@ function Login() {
           <button type="submit">Login</button>
         </div>
       </form>
+      <p>
+        Don't have an account?{" "}
+        <a href="#sign-up" style={{ color: "#0f88c1ff", fontWeight: "bold" }}>
+          Sign up!
+        </a>
+      </p>
+      <footer style={{ color: "#7d7d7d" }}>
+        <p>&copy; 2025 GeezMap. All rights reserved.</p>
+      </footer>
     </div>
   );
 }

@@ -42,7 +42,7 @@ import {
 let DefaultIcon = L.icon({
   iconUrl: icon,
   iconSize: [42, 42],
-  iconAnchor: [12, 42],
+  iconAnchor: [21, 42],
   popupAnchor: [9, -23],
 });
 L.Marker.prototype.options.icon = DefaultIcon;
@@ -67,13 +67,25 @@ function App() {
 
   return (
     <div className="App">
-      <div className="App-sidebar">
+      <section className="App-sidebar">
         <h2>GeezMap</h2>
         <p>Click on the map to add a marker!</p>
-        <p>
-          You can then customise it with your own name for it or another color.
-        </p>
-      </div>
+        <hr></hr>
+        <div className="Post-Central">
+          <p>
+            Here you can write a post and attach an image to a post, whose
+            postion will be the same as your current marker's position!
+          </p>
+          <form className="PostForm">
+            <input type="text" name="post_title" placeholder="Post Title" />
+            <input type="text" name="post_body" placeholder="Post Body" />
+            <input type="file" name="post_image" />
+            <button type="submit" className="SubmitPostButton">
+              Submit Post
+            </button>
+          </form>
+        </div>
+      </section>
       <MapContainer
         center={initialPosition}
         zoom={initialZoom}
