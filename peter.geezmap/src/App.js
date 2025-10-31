@@ -13,31 +13,7 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import icon from "./media/marker-iconx32.png";
 
-import {
-  Slider,
-  Sketch,
-  Material,
-  Colorful,
-  Compact,
-  Circle,
-  Wheel,
-  Block,
-  Github,
-  Chrome,
-} from "@uiw/react-color";
-import {
-  Alpha,
-  Hue,
-  ShadeSlider,
-  Saturation,
-  Interactive,
-  hsvaToHslaString,
-} from "@uiw/react-color";
-import {
-  EditableInput,
-  EditableInputRGBA,
-  EditableInputHSLA,
-} from "@uiw/react-color";
+import { Circle } from "@uiw/react-color";
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
