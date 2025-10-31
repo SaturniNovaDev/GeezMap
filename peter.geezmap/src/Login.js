@@ -1,5 +1,6 @@
 import "./Login.css";
 import { useState } from "react";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 
 function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -7,6 +8,7 @@ function Login() {
   const [userPassword, setUserPassword] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
 
+  const navigate = useNavigate();
   function validateLogin(e) {
     // prevent form submission reload
     if (e && e.preventDefault) e.preventDefault();
@@ -17,7 +19,7 @@ function Login() {
     if (userEmail === hardcodedEmail && userPassword === hardcodedPassword) {
       setIsLoggedIn(true);
       setStatusMessage("Login successful!");
-      
+      navigate("/app");
     } else {
       setIsLoggedIn(false);
       setStatusMessage("Login failed. Please check email or password.");
@@ -26,7 +28,9 @@ function Login() {
 
   return (
     <div className="LoginScreen">
-      <h2>Welcome to GeezMap</h2>
+      <h1 className="title" style={{ fontFamily: "serif" }}>
+        Welcome to GeezMap
+      </h1>
       <form className="LoginForm" onSubmit={validateLogin}>
         <div className="EmailField">
           <label>
@@ -52,16 +56,16 @@ function Login() {
             />
           </label>
         </div>
-        <div className="LoginButton">
-          <button type="submit">Login</button>
+        <div className="LoginButtonContainer">
+          <button type="submit" className="LoginButton">
+            Login
+          </button>
         </div>
       </form>
-      <p>
-        Don't have an account?{" "}
-        <a href="#sign-up" style={{ color: "#0f88c1ff", fontWeight: "bold" }}>
-          Sign up!
-        </a>
-      </p>
+      <p>Don't have an account?</p>
+      <Link to={"/sign-up"} style={{ color: "#0f88c1ff", fontWeight: "bold" }}>
+        <span>Sign up!</span>
+      </Link>
 
       {/* status shown via React state */}
       <p

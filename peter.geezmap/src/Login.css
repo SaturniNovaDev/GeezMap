@@ -49,7 +49,7 @@
   outline: var(--outline);
 }
 
-.LoginButton :is(button) {
+.LoginButton {
   padding: 0.5rem;
   font-size: 1rem;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -62,19 +62,19 @@
   transition: all 0.3s ease;
 }
 
-.LoginButton :is(button):hover {
-  background-color: #3eba44;
+.LoginButton:hover {
+  background-color: #379a3c;
 }
 
-.LoginButton :is(button):active {
+.LoginButton:active {
   background-color: #4caf50;
 }
 
-.LoginButton :is(button):disabled {
+.LoginButton:disabled {
   background-color: #9e9e9e;
   cursor: not-allowed;
 }
 
-.LoginButton :is(button):focus {
+.LoginButton:focus {
   outline: var(--outline);
 }

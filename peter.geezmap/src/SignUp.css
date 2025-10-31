@@ -1,0 +1,17 @@
+.SignUp-screen {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  font-family: serif;
+}
+
+.copyright-area {
+  width: calc(30vw + 3rem);
+  background-color: #eaeaea;
+  padding: 1rem;
+  border-radius: 0.3rem;
+}
+
+.subtext {
+  background-color: #cdcdcd;
+}

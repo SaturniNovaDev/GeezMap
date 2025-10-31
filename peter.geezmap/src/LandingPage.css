@@ -1,0 +1,15 @@
+.LandingPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-block: 5rem;
+    padding-inline: 10rem;
+    font-family: serif;
+    min-height: 32rem;
+}
+
+button {
+    font-family: monospace;
+}
